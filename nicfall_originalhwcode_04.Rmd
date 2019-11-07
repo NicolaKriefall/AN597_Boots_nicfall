@@ -1,0 +1,62 @@
+---
+title: "nicfall_originalhwcode_05"
+author: "Nicola Kriefall"
+date: "11/7/2019"
+output: html_document
+---
+
+[Hw assignment #5](https://fuzzyatelin.github.io/bioanth-stats/homework-05.html)
+
+1. Using the “KamilarAndCooperData.csv” dataset, run a linear regression looking at log(HomeRange_km2) in relation to log(Body_mass_female_mean) and report your β coeffiecients (slope and intercept).
+
+```{r}
+#first, reading in the data:
+library(curl)
+f <- curl("https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/master/AN597_Fall19/KamilarAndCooperData.csv")
+d <- read.csv(f, header = TRUE, sep = ",", stringsAsFactors = FALSE)
+str(d$HomeRange_km2) #lots of NAs 
+str(d$Body_mass_female_mean) #more NAs
+d_km <- d[complete.cases(d$HomeRange_km2),] #removing NAs for home range
+d_full <- d_km[complete.cases(d_km$Body_mass_female_mean),] #removing NAs for body mass
+
+#linear regression looking at log(home range) vs. log(body mass female mean)
+model <- lm(log(d_full$HomeRange_km2)~log(d_full$Body_mass_female_mean),data=d_full)
+#intercept is reportedly -9.441
+#slope is reportedly 1.036
+```
+
+[2] Then, use bootstrapping to sample from your data 1000 times with replacement, each time fitting the same model and calculating the same coefficients. This generates a sampling distribution for each β coefficient.
+
+```{r}
+x <- log(d_full$Body_mass_female_mean)
+y <- log(d_full$HomeRange_km2)
+set.int <- NULL # sets up a dummy variable to hold our 10000 simulations
+for (i in 1:1000){
+  bw <- sample(x,size=30,replace=TRUE)
+  km <- sample(y,size=30,replace=TRUE)
+  lmz <- lm(km~bw)
+  set.int[i] <- lmz[["coefficients"]][["(Intercept)"]]
+}
+set.slope <- NULL # sets up a dummy variable to hold our 10000 simulations
+for (i in 1:1000){
+  bw <- sample(x,size=30,replace=TRUE)
+  km <- sample(y,size=30,replace=TRUE)
+  lmz <- lm(km~bw)
+  set.slope[i] <- lmz[["coefficients"]][["bw"]]
+}
+sd(x=set.int)
+sd(x=set.slope)
+
+```
+
+
+
+Estimate the standard error for each of your β coefficients as the standard deviation of the sampling distribution from your bootstrap and determine the 95% CI for each of your β coefficients based on the appropriate quantiles from your sampling distribution.
+
+How does the former compare to the SE estimated from your entire dataset using the formula for standard error implemented in lm()?
+
+How does the latter compare to the 95% CI estimated from your entire dataset?
+
+
+
+
