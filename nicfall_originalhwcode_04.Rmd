@@ -102,6 +102,6 @@ summary(model) #my original entire dataset
 
 3. What does this part mean: "Estimate the standard error for each of your β coefficients as the standard deviation of the sampling distribution from your bootstrap"
 
-4. The use of "the former" & "the latter" was very confusing. Also we have two standard errors right? One for slope & one for intercept? So am I comparing all three in the section about 'the former' & 'the latter'?
+4. The use of "the former" & "the latter" was very confusing. 
 
 5. Couldn't figure out how to calculate the 95% CI for the full dataset. I think my issue overall is that the terminology is the same within a linear model as for a sampling distribution & I can't keep track of what we're referring to anymore. 
