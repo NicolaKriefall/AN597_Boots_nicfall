@@ -90,13 +90,19 @@ summary(model) #my original entire dataset
 [last part of 2] How does the latter compare to the 95% CI estimated from your entire dataset?
 
 ```{r}
-#Not sure how to calculate the 95% CI for a linear model
+confint(model)
+#very different
 ```
 
 
 # Challenges
 
-1. I don't understand why my average slope & intercept values after bootstrapping are completely off from what the real ones were from the whole dataset - maybe I made a mistake somewhere. 
+1. I don't understand why my average slope & intercept values after bootstrapping are completely off from what the real ones were from the whole dataset (see below) - maybe I made a mistake somewhere. 
+
+```{r}
+mean(set.int) #bootstrapped result vs. -9.441 real value :(
+mean(set.slope) #bootstrapped result vs. 1.036 real value :(
+```
 
 2. Similarly, my CI from the quantiles of my dataset vs. running this type of calculation: "lower.slope <- mean(set.slope) + qnorm(0.025, mean=0, sd=1)*se(set.slope)" were completely different - but in Chris's example on module 7, they were very similar results. Again maybe I made a mistake somewhere. 
 
@@ -104,4 +110,4 @@ summary(model) #my original entire dataset
 
 4. The use of "the former" & "the latter" was very confusing. 
 
-5. Couldn't figure out how to calculate the 95% CI for the full dataset. I think my issue overall is that the terminology is the same within a linear model as for a sampling distribution & I can't keep track of what we're referring to anymore. 
+5. I think part of my issue overall is that the terminology is the same within a linear model as for a sampling distribution & I can't keep track of which we're referring to.
