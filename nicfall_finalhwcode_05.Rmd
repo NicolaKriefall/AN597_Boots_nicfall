@@ -109,4 +109,4 @@ mean(set.slope) #bootstrapped result vs. 1.036 real value
 
 4. The use of "the former" & "the latter" was confusing. 
 
-5. I think part of my issue overall is that the terminology is the same within a linear model as for a sampling distribution & I can't keep track of which we're referring to.
+5. I think part of my issue overall is that the terminology is similar within a linear model and a sampling distribution & I can't keep track of which we're referring to
